@@ -1,21 +1,34 @@
-function onloadFunc() {
-    console.log("Test");
-    loadData("/Agumon");
-    // postData("/name", {"banana": "rama"});
-    deleteData("/name/-P2bUC9wTCQffVYrtDGy")
-    putData("/name", {"banana": "rama", "gurke": 42});
-}
-
+let names = [];
 const BASE_URL = "https://remotestorage-1c70a-default-rtdb.europe-west1.firebasedatabase.app/";
+
+async function onloadFunc() {
+    // console.log("Test");
+    // loadData("/Agumon");
+    // // postData("/name", {"banana": "rama"});
+    // deleteData("/name/-P2bUC9wTCQffVYrtDGy")
+    // putData("/name", {"banana": "rama", "gurke": 42});
+    let userResponse = await getAllUsers("namen");
+    let UserKeysArray = Object.keys(userResponse);
+    for (let i = 0; i < UserKeysArray.length; i++) {
+        names.push(
+            {
+                id : UserKeysArray[i],
+                user : userResponse[UserKeysArray[i]]
+            }
+        )
+    }
+    console.log(names);
+    await addEditSingleUser();
+}
 
 // Wenn wir bei Firebase auf die Daten zugreifen wollen, müssen wir immer ".json" dazu schreiben
 // Bei einem Objekt, kann man noch einen Pfad dazugeben um weiter rein zu kommen ("path")
 // hier steht (path=""), dass wenn kein Parameter übergeben ist, automatisch leer weitergegeben wird
-    async function loadData(path="") {
-        let response = await fetch(BASE_URL + path + ".json");
-        let responseToJSON = await response.json();
-        console.log(responseToJSON);
-    }
+    // async function loadData(path="") {
+    //     let response = await fetch(BASE_URL + path + ".json");
+    //     let responseToJSON = await response.json();
+    //     console.log(responseToJSON);
+    // }
 
 // Mit der methode POST können wir auch etwas bei Firebase hochladen
     // async function postData(path="", data={}) {
@@ -30,12 +43,12 @@ const BASE_URL = "https://remotestorage-1c70a-default-rtdb.europe-west1.firebase
     // }
 
 // Mit der Methode Delete können wir Elemente aus Firebase löschen
-    async function deleteData(path="") {
-        let response = await fetch(BASE_URL + path + ".json",{
-            method: "DELETE",
-        });
-        return responseToJSON = await response.json();
-    }
+    // async function deleteData(path="") {
+    //     let response = await fetch(BASE_URL + path + ".json",{
+    //         method: "DELETE",
+    //     });
+    //     return responseToJSON = await response.json();
+    // }
 
 // Mit der Methode PUT ersetzt du den inhalt direkt in einem Pfad
     async function putData(path="", data={}) {
@@ -51,3 +64,13 @@ const BASE_URL = "https://remotestorage-1c70a-default-rtdb.europe-west1.firebase
 
 // In Firebase werden nur Objecte gespeicher und NICHT Arrays
 // Keine Arrays hochladen
+
+// Wie man Daten aus Firebase zieht und einfügt als Beispiel
+    async function addEditSingleUser(id=44, user={name: "Albert"}) {
+        putData(`namen/${id}`, user)
+    }
+
+    async function getAllUsers(path) {
+        let response = await fetch(BASE_URL + path + ".json");
+        return responseToJSON = await response.json();
+    }
