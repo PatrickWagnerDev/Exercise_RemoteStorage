@@ -3,6 +3,7 @@ function onloadFunc() {
     loadData("/Agumon");
     // postData("/name", {"banana": "rama"});
     deleteData("/name/-P2bUC9wTCQffVYrtDGy")
+    putData("/name", {"banana": "rama", "gurke": 42});
 }
 
 const BASE_URL = "https://remotestorage-1c70a-default-rtdb.europe-west1.firebasedatabase.app/";
@@ -32,6 +33,18 @@ const BASE_URL = "https://remotestorage-1c70a-default-rtdb.europe-west1.firebase
     async function deleteData(path="") {
         let response = await fetch(BASE_URL + path + ".json",{
             method: "DELETE",
+        });
+        return responseToJSON = await response.json();
+    }
+
+// Mit der Methode PUT ersetzt du den inhalt direkt in einem Pfad
+    async function putData(path="", data={}) {
+        let response = await fetch(BASE_URL + path + ".json",{
+            method: "PUT",
+            header: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data)
         });
         return responseToJSON = await response.json();
     }
