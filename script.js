@@ -1,6 +1,7 @@
 function onloadFunc() {
     console.log("Test");
     loadData("/Agumon");
+    postData("", {"banana": "rama"});
 }
 
 const BASE_URL = "https://remotestorage-1c70a-default-rtdb.europe-west1.firebasedatabase.app/";
@@ -13,3 +14,14 @@ const BASE_URL = "https://remotestorage-1c70a-default-rtdb.europe-west1.firebase
         let responseToJSON = await response.json();
         console.log(responseToJSON);
     }
+
+async function postData(path="", data={}) {
+    let response = await fetch(BASE_URL + path + ".json",{
+        method: "POST",
+        header: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data)
+    });
+    return responseToJSON = await response.json();
+}
