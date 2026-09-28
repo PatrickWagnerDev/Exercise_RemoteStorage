@@ -1,7 +1,7 @@
 function onloadFunc() {
     console.log("Test");
     loadData("/Agumon");
-    postData("", {"banana": "rama"});
+    postData("/name", {"banana": "rama"});
 }
 
 const BASE_URL = "https://remotestorage-1c70a-default-rtdb.europe-west1.firebasedatabase.app/";
@@ -15,13 +15,14 @@ const BASE_URL = "https://remotestorage-1c70a-default-rtdb.europe-west1.firebase
         console.log(responseToJSON);
     }
 
-async function postData(path="", data={}) {
-    let response = await fetch(BASE_URL + path + ".json",{
-        method: "POST",
-        header: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data)
-    });
-    return responseToJSON = await response.json();
-}
+// Mit der methode POST können wir auch etwas bei Firebase hochladen
+    async function postData(path="", data={}) {
+        let response = await fetch(BASE_URL + path + ".json",{
+            method: "POST",
+            header: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data)
+        });
+        return responseToJSON = await response.json();
+    }
