@@ -1,13 +1,13 @@
-# Project name
+# Exercise_RemoteStorage
 
-Project description
+a small exercise to test Firebase API Tools.
 
 ## Features
 
-* Example1
-* Example2
-* Example3
-* Example4
+* fetch: GET
+* fetch: POST
+* fetch DELETE
+* PUT
 
 ## Technologies
 
@@ -17,7 +17,7 @@ Project description
 
 ## Project Status
 
-> **Current Status:** Project initialization
+> **Current Status:** In Progress
 <!--
 PROJECT STATUS:
 Update only the "Current Status" and the text above whenever the project progresses.
