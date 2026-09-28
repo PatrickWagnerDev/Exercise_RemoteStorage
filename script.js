@@ -26,3 +26,8 @@ const BASE_URL = "https://remotestorage-1c70a-default-rtdb.europe-west1.firebase
     //     });
     //     return responseToJSON = await response.json();
     // }
+
+// Mit der Methode Delete können wir Elemente aus Firebase löschen
+    async function deleteData(path="", data={}) {
+        
+    }
