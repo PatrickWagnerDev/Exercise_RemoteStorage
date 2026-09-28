@@ -2,6 +2,7 @@ function onloadFunc() {
     console.log("Test");
     loadData("/Agumon");
     // postData("/name", {"banana": "rama"});
+    deleteData("/name/-P2bUC9wTCQffVYrtDGy")
 }
 
 const BASE_URL = "https://remotestorage-1c70a-default-rtdb.europe-west1.firebasedatabase.app/";
@@ -28,6 +29,9 @@ const BASE_URL = "https://remotestorage-1c70a-default-rtdb.europe-west1.firebase
     // }
 
 // Mit der Methode Delete können wir Elemente aus Firebase löschen
-    async function deleteData(path="", data={}) {
-        
+    async function deleteData(path="") {
+        let response = await fetch(BASE_URL + path + ".json",{
+            method: "DELETE",
+        });
+        return responseToJSON = await response.json();
     }
