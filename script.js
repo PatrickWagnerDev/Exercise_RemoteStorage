@@ -48,3 +48,6 @@ const BASE_URL = "https://remotestorage-1c70a-default-rtdb.europe-west1.firebase
         });
         return responseToJSON = await response.json();
     }
+
+// In Firebase werden nur Objecte gespeicher und NICHT Arrays
+// Keine Arrays hochladen
